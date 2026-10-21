@@ -1,11 +1,13 @@
 CREATE TABLE "users" (
+    "id" INTEGER PRIMARY KEY,
     "first_name" TEXT NOT NULL,
     "last_name" TEXT NOT NULL,
     "user_name" TEXT NOT NULL UNIQUE,
-    "password" TEXT NOT NULL
+    "password" TEXT NOT NULL,
 );
 
 CREATE TABLE "schools" (
+    "id" INTEGER PRIMARY KEY,
     "name" TEXT NOT NULL UNIQUE,
     "type" TEXT NOT NULL,
     "location" TEXT NOT NULl,
@@ -13,6 +15,7 @@ CREATE TABLE "schools" (
 );
 
 CREATE TABLE "companies" (
+    "id" INTEGER PRIMARY KEY,
     "name" TEXT NOT NULL UNIQUE,
     "industry" TEXT NOT NULL,
     "location" TEXT NOT NULL
@@ -35,6 +38,7 @@ CREATE TABLE "school_affiliations" (
     "end_date" NUMERIC,
     "degree" TEXT,
 
+    PRIMARY KEY ("user_id", "school_id", "start_date"),
     FOREIGN KEY ("user_id") REFERENCES "users"("id"),
     FOREIGN KEY ("school_id") REFERENCES "schools"("id")
 );
@@ -46,6 +50,7 @@ CREATE TABLE "company_affiliations" (
     "start_date" NUMERIC NOT NULL,
     "end_date" NUMERIC,
 
+    PRIMARY KEY ("user_id", "company_id", "start_date"),
     FOREIGN KEY ("user_id") REFERENCES "users"("id"),
     FOREIGN KEY ("company_id") REFERENCES "companies"("id")
 );
